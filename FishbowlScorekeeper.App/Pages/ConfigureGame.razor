@@ -18,6 +18,8 @@
 	<ConfigTeamEntry ITeam="@i" Name="@TeamNames[i]" FnOnNameChanged="OnNameChangedCallback" />
 }
 
+<br />
+
 <!--Number of Rounds-->
 <div style="display: flex; flex-flow: row;">
 	<p>How many rounds?</p>
@@ -29,3 +31,6 @@
 {
 	<ConfigRoundEntry IRound="@i" Name="@RoundNames[i]" Duration="@RoundDurations[i]" FnOnRoundChanged="OnRoundChangedCallback" />
 }
+
+<!--Start Game Button-->
+<button @onclick="OnStartGameClick">Start Game</button>

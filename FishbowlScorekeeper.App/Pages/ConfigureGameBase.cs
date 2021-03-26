@@ -1,25 +1,35 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 using FishbowlScorekeeper.App.Components;
 using FishbowlScorekeeper.Shared;
 using Microsoft.AspNetCore.Components;
-
+using Microsoft.AspNetCore.Components.Web;
+using Microsoft.JSInterop;
 
 namespace FishbowlScorekeeper.App.Pages
 {
 	public class ConfigureGameBase : ComponentBase
 	{
+		[Inject]
+		private IJSRuntime m_jsRuntime { get; set; }
+
 		protected override Task OnInitializedAsync()
 		{
 			for (int i = 0; i < TeamNames.Length; i++)
 				TeamNames[i] = "";
 
 			for (int i = 0; i < RoundNames.Length; i++)
-				RoundNames[i] = "";
+			{
+				if (i == 0) RoundNames[i] = "Catch Phrase";
+				else if (i == 1) RoundNames[i] = "Charades";
+				else if (i == 2) RoundNames[i] = "One Word";
+				else RoundNames[i] = "";
+			}
 
 			for (int i = 0; i < RoundDurations.Length; i++)
-				RoundDurations[i] = 0;
+				RoundDurations[i] = Common.DEFAULT_ROUND_DURATION;
 
 			return base.OnInitializedAsync();
 		}
@@ -52,6 +62,69 @@ namespace FishbowlScorekeeper.App.Pages
 		{
 			RoundNames[e.IRound] = e.Name;
 			RoundDurations[e.IRound] = e.Duration;
+		}
+
+		// Start Game
+		protected void OnStartGameClick(MouseEventArgs e)
+		{
+			string errorMessage = "";
+			if (!IsInputValid(out errorMessage))
+			{
+				m_jsRuntime.InvokeVoidAsync("alert", "Error!\n" + errorMessage.ToString());
+				return;
+			}
+
+			m_jsRuntime.InvokeVoidAsync("alert", "Start game!");
+		}
+
+		private bool IsInputValid(out string errorMessage)
+		{
+			// Team Names
+			for (int i = 0; i < NumTeams; i++)
+			{
+				if (TeamNames[i].Length == 0)
+				{
+					errorMessage = String.Format("Team {0} must have a name.", i + 1);
+					return false;
+				}
+
+				for (int j = i; j < NumTeams; j++)
+				{
+					if (TeamNames[i] == TeamNames[j] && i != j)
+					{
+						errorMessage = String.Format("Team {0} and Team {1} have the same name.", i+1, j+1);
+						return false;
+					}
+				}
+			}
+
+			// Rounds
+			for (int i = 0; i < NumRounds; i++)
+			{
+				if (RoundNames[i].Length == 0)
+				{
+					errorMessage = String.Format("Round {0} must have a name.", i + 1);
+					return false;
+				}
+
+				if (RoundDurations[i] <= 0)
+				{
+					errorMessage = String.Format("Round {0} must have a valid time.", i + 1);
+					return false;
+				}
+
+				for (int j = i; j < NumRounds; j++)
+				{
+					if (RoundNames[i] == RoundNames[j] && i != j)
+					{
+						errorMessage = String.Format("Round {0} and Round {1} have the same name.", i + 1, j + 1);
+						return false;
+					}
+				}
+			}
+
+			errorMessage = "";
+			return true;
 		}
 	}
 }
