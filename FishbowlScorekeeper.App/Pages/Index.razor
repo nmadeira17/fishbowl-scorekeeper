@@ -1,3 +1,48 @@
 ﻿@page "/"
+@inject IJSRuntime JSRuntime
 
-<h1>This is from Index.razor</h1>
+<div id="home-page-content">
+	<div class="home-page-btn-wrapper">
+		<button class="home-page-btn" @onclick="OnPlayClicked">Play</button>
+	</div>
+	<div class="home-page-btn-wrapper">
+		<button class="home-page-btn" @onclick="OnInstructionsClicked">Instructions</button>
+	</div>
+</div>
+
+@code
+{
+	public override async Task SetParametersAsync(ParameterView parameters)
+	{
+		int x = 5;
+		x += 1;
+
+		await base.SetParametersAsync(parameters);
+	}
+
+	protected override async Task OnInitializedAsync()
+	{
+		int x = 5;
+		x += 1;
+
+		await base.OnInitializedAsync();
+	}
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		int x = 5;
+		x += 1;
+
+		await base.OnAfterRenderAsync(firstRender);
+	}
+
+	private void OnPlayClicked()
+	{
+		JSRuntime.InvokeVoidAsync("alert", "Let's play a game!");
+	}
+
+	private void OnInstructionsClicked()
+	{
+		JSRuntime.InvokeVoidAsync("alert", "Let's read the instructions.");
+	}
+}

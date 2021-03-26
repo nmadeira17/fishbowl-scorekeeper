@@ -1,4 +1,9 @@
 ﻿@inherits LayoutComponentBase
 
-<!--Intializes an instance of index.razor-->
-@Body
+<div class="canvas">
+	<NavigationBar />
+	<div id="canvas-game">
+		@Body
+	</div>
+	<FooterBar />
+</div>
