@@ -1,0 +1,11 @@
+﻿@inherits ConfigRoundEntryBase
+
+@{ 
+	int roundNum = IRound + 1;
+}
+
+<div style="display: flex; flex-flow: row">
+	<p>Round @roundNum name:</p>
+	<input type="text" @onchange="OnNameChange" value="@Name" />
+	<input type="number" @onchange="OnDurationChange" value="@Duration" />
+</div>

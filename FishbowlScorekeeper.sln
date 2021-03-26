@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FishbowlScorekeeper.App", "FishbowlScorekeeper.App\FishbowlScorekeeper.App.csproj", "{472B7555-483C-48DC-AD84-7C2252831C3A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FishbowlScorekeeper.Shared", "FishbowlScorekeeper.Shared\FishbowlScorekeeper.Shared.csproj", "{4B8B8FBD-52E7-401B-86F4-12C27F70FF8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{472B7555-483C-48DC-AD84-7C2252831C3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{472B7555-483C-48DC-AD84-7C2252831C3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{472B7555-483C-48DC-AD84-7C2252831C3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B8B8FBD-52E7-401B-86F4-12C27F70FF8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B8B8FBD-52E7-401B-86F4-12C27F70FF8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B8B8FBD-52E7-401B-86F4-12C27F70FF8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B8B8FBD-52E7-401B-86F4-12C27F70FF8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

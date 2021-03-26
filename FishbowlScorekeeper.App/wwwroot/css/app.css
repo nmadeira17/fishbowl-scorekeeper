@@ -73,6 +73,17 @@
 	width: 75%;
 }
 
+/* Instructions */
+
+#instructions-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+
+
 /*
 	General Utilities
 */

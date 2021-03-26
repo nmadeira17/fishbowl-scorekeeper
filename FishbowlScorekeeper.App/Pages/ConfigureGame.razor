@@ -1,0 +1,31 @@
+﻿@page "/configure"
+@inherits ConfigureGameBase
+
+@using FishbowlScorekeeper.App.Components;
+@using FishbowlScorekeeper.Shared;
+
+<h1>Configure Game</h1>
+
+<!--Number of Teams-->
+<div style="display: flex; flex-flow: row;">
+	<p>How many teams?</p>
+	<IntegerSelector First="Common.MIN_TEAMS" Last="@Common.MAX_TEAMS" Default="Common.DEFAULT_NUM_TEAMS" FnOnChanged="OnNumTeamsChangedCallback" />
+</div>
+
+<!--Team Names-->
+@for (int i = 0; i < NumTeams; i++)
+{
+	<ConfigTeamEntry ITeam="@i" Name="@TeamNames[i]" FnOnNameChanged="OnNameChangedCallback" />
+}
+
+<!--Number of Rounds-->
+<div style="display: flex; flex-flow: row;">
+	<p>How many rounds?</p>
+	<IntegerSelector First="Common.MIN_ROUNDS" Last="@Common.MAX_ROUNDS" Default="Common.DEFAULT_NUM_ROUNDS" FnOnChanged="OnNumRoundsChangedCallback" />
+</div>
+
+<!--Round Details-->
+@for (int i = 0; i < NumRounds; i++)
+{
+	<ConfigRoundEntry IRound="@i" Name="@RoundNames[i]" Duration="@RoundDurations[i]" FnOnRoundChanged="OnRoundChangedCallback" />
+}

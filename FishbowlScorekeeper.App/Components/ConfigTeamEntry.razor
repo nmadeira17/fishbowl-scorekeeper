@@ -1,0 +1,10 @@
+﻿@inherits ConfigTeamEntryBase
+
+@{
+	int teamNum = ITeam + 1;
+}
+
+<div style="display: flex; flex-flow: row">
+	<p>Team @teamNum name:</p>
+	<input type="text" @onchange="OnChange" value="@Name"/>
+</div>

@@ -1,0 +1,15 @@
+﻿@inherits IntegerSelectorBase
+
+<select @onchange="FnOnChanged">
+	@for (int i = First; i <= Last; i++)
+	{
+		@if (i == Default)
+		{
+			<option value="@i" selected>@i</option>
+		}
+		else
+		{
+			<option value="@i">@i</option>
+		}
+	}
+</select>
