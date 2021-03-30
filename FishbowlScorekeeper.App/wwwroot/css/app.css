@@ -1,5 +1,6 @@
 ﻿html, body, #app {
 	height: 100%;
+	font-family: 'Source Sans Pro', sans-serif;
 }
 
 .canvas {
@@ -44,9 +45,8 @@
 
 .brand {
 	margin: auto;
-
 	font-size: 24pt;
-	font-family: Arial;
+	/*font-family: Arial;*/
 }
 
 /* Home Page*/

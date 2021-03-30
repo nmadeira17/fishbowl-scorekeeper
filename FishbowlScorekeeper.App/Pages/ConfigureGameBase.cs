@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using FishbowlScorekeeper.App.Components;
@@ -74,7 +74,17 @@ namespace FishbowlScorekeeper.App.Pages
 				return;
 			}
 
-			m_jsRuntime.InvokeVoidAsync("alert", "Start game!");
+			IList<Team> teams = new List<Team>();
+			for (int i = 0; i < NumTeams; i++)
+				teams.Add(new Team(TeamNames[i]));
+
+			IList<Round> rounds = new List<Round>();
+			for (int i = 0; i < NumRounds; i++)
+				rounds.Add(new Round(RoundNames[i], RoundDurations[i]));
+
+			GameConfig gameConfig = new GameConfig(teams, rounds);
+
+			m_jsRuntime.InvokeVoidAsync("alert", "Start game!\n" + gameConfig.ToString());
 		}
 
 		private bool IsInputValid(out string errorMessage)

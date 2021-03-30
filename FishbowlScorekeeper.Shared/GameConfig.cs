@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace FishbowlScorekeeper.Shared
 {
@@ -13,6 +14,21 @@ namespace FishbowlScorekeeper.Shared
 			Teams = teams;
 			Rounds = rounds;
 		}
+
+		public override string ToString()
+		{
+			StringBuilder sb = new StringBuilder();
+
+			sb.AppendLine("Teams");
+			foreach (Team team in Teams)
+				sb.AppendLine(team.ToString());
+
+			sb.AppendLine("Rounds");
+			foreach (Round round in Rounds)
+				sb.AppendLine(round.ToString());
+
+			return sb.ToString();
+		}
 	}
 
 	public class Team
@@ -21,6 +37,16 @@ namespace FishbowlScorekeeper.Shared
 		/// The name of the team.
 		/// </summary>
 		public string Name { get; set; }
+
+		public Team(string name)
+		{
+			Name = name;
+		}
+
+		public override string ToString()
+		{
+			return String.Format("Team: {0}", Name);
+		}
 	}
 
 	public class Round
@@ -35,5 +61,16 @@ namespace FishbowlScorekeeper.Shared
 		/// The time limit of the round in seconds
 		/// </summary>
 		public int TimeLimit { get; set; }
+
+		public Round(string name, int timeLimit)
+		{
+			Name = name;
+			TimeLimit = timeLimit;
+		}
+
+		public override string ToString()
+		{
+			return String.Format("Round: {0}, Time Limit: {1}", Name, TimeLimit);
+		}
 	}
 }
