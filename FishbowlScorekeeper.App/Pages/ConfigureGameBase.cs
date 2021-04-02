@@ -15,6 +15,9 @@ namespace FishbowlScorekeeper.App.Pages
 		[Inject]
 		private IJSRuntime m_jsRuntime { get; set; }
 
+		[Inject]
+		private IGameConfig m_gameConfig { get; set; }
+
 		protected override Task OnInitializedAsync()
 		{
 			for (int i = 0; i < TeamNames.Length; i++)
@@ -82,9 +85,9 @@ namespace FishbowlScorekeeper.App.Pages
 			for (int i = 0; i < NumRounds; i++)
 				rounds.Add(new Round(RoundNames[i], RoundDurations[i]));
 
-			GameConfig gameConfig = new GameConfig(teams, rounds);
+			m_gameConfig.Init(teams, rounds);
 
-			m_jsRuntime.InvokeVoidAsync("alert", "Start game!\n" + gameConfig.ToString());
+			m_jsRuntime.InvokeVoidAsync("alert", "Start game!\n" + m_gameConfig.ToString());
 		}
 
 		private bool IsInputValid(out string errorMessage)

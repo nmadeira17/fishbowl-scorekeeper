@@ -8,6 +8,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
+using FishbowlScorekeeper.Shared;
+
 namespace FishbowlScorekeeper.App
 {
 	public class Program
@@ -18,6 +20,7 @@ namespace FishbowlScorekeeper.App
 			builder.RootComponents.Add<App>("#app");
 
 			builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+			builder.Services.AddSingleton<IGameConfig, GameConfig>();
 
 			await builder.Build().RunAsync();
 		}
