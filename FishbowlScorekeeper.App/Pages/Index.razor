@@ -9,11 +9,3 @@
 		<button class="home-page-btn" onclick="window.location.href='/instructions'">Instructions</button>
 	</div>
 </div>
-
-@code
-{
-	private void OnPlayClicked()
-	{
-		JSRuntime.InvokeVoidAsync("alert", "Let's play a game!");
-	}
-}

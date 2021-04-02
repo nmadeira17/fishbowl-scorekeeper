@@ -18,6 +18,9 @@ namespace FishbowlScorekeeper.App.Pages
 		[Inject]
 		private IGameConfig m_gameConfig { get; set; }
 
+		[Inject]
+		private NavigationManager m_navigationManager { get; set; }
+
 		protected override Task OnInitializedAsync()
 		{
 			for (int i = 0; i < TeamNames.Length; i++)
@@ -87,7 +90,7 @@ namespace FishbowlScorekeeper.App.Pages
 
 			m_gameConfig.Init(teams, rounds);
 
-			m_jsRuntime.InvokeVoidAsync("alert", "Start game!\n" + m_gameConfig.ToString());
+			m_navigationManager.NavigateTo("playgame");
 		}
 
 		private bool IsInputValid(out string errorMessage)
