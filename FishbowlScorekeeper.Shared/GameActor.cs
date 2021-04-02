@@ -6,14 +6,16 @@ namespace FishbowlScorekeeper.Shared
 {
 	public class GameActor
 	{
-		private GameConfig m_gameConfig;
+		private IGameConfig m_gameConfig;
+		private GameScore m_score;
 		
 		private int m_iCurrentRound;
 		private int m_iCurrentTeam;
 
-		public GameActor(GameConfig gameConfig)
+		public GameActor(IGameConfig gameConfig)
 		{
 			m_gameConfig = gameConfig;
+			m_score = new GameScore(m_gameConfig.Teams.Count, m_gameConfig.Rounds.Count);
 		}
 
 		/* Accessors */
@@ -25,6 +27,16 @@ namespace FishbowlScorekeeper.Shared
 		public string GetCurrentTeamName()
 		{
 			return m_gameConfig.Teams[ICurrentTeam()].Name;
+		}
+
+		public int GetScore(int team, int round)
+		{
+			return m_score.GetScore(team, round);
+		}
+
+		public int GetTeamTotal(int team)
+		{
+			return m_score.GetTeamTotal(team);
 		}
 
 		/* Game Management */
@@ -62,6 +74,16 @@ namespace FishbowlScorekeeper.Shared
 		public int GetScore(int team, int round)
 		{
 			return m_score[team, round];
+		}
+
+		public int GetTeamTotal(int team)
+		{
+			int sum = 0;
+
+			for (int i = 0; i < m_score.GetLength(team); i++)
+				sum += m_score[team, i];
+
+			return sum;
 		}
 
 		public override string ToString()

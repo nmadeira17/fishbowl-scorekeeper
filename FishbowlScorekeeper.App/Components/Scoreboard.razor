@@ -1,0 +1,35 @@
+﻿@inherits ScoreboardBase
+
+<div class="score-board-full green">
+	<h2>Score</h2>
+	<table>
+		<thead>
+			<tr>
+				<th />
+				@for (int i = 0; i < m_gameConfig.Teams.Count; i++)
+				{
+				<th>@m_gameConfig.Teams[i].Name</th>
+				}
+			</tr>
+		</thead>
+		<tbody>
+			@for (int i = 0; i < m_gameConfig.Rounds.Count; i++)
+			{
+			<tr>
+				<td>@m_gameConfig.Rounds[i].Name</td>
+				@for (int j = 0; j < m_gameConfig.Teams.Count; j++)
+				{
+				<td>@m_gameActor.GetScore(j, i)</td>
+				}
+			</tr>
+			}
+		<tr>
+			<td>Total</td>
+			@for (int i = 0; i < m_gameConfig.Teams.Count; i++)
+			{
+			<td>@m_gameActor.GetTeamTotal(i)</td>
+			}
+		</tr>
+		</tbody>
+	</table>
+</div>
