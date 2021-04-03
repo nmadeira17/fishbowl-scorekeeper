@@ -6,28 +6,28 @@
 		<thead>
 			<tr>
 				<th />
-				@for (int i = 0; i < m_gameConfig.Teams.Count; i++)
+				@for (int i = 0; i < m_gameActor.Config.Teams.Count; i++)
 				{
-				<th>@m_gameConfig.Teams[i].Name</th>
+				<th>@m_gameActor.Config.Teams[i].Name</th>
 				}
 			</tr>
 		</thead>
 		<tbody>
-			@for (int i = 0; i < m_gameConfig.Rounds.Count; i++)
+			@for (int i = 0; i < m_gameActor.Config.Rounds.Count; i++)
 			{
 			<tr>
-				<td>@m_gameConfig.Rounds[i].Name</td>
-				@for (int j = 0; j < m_gameConfig.Teams.Count; j++)
+				<td>@m_gameActor.Config.Rounds[i].Name</td>
+				@for (int j = 0; j < m_gameActor.Config.Teams.Count; j++)
 				{
-				<td>@m_gameActor.GetScore(j, i)</td>
+				<td>@m_gameActor.Score.GetScore(j, i)</td>
 				}
 			</tr>
 			}
 		<tr>
 			<td>Total</td>
-			@for (int i = 0; i < m_gameConfig.Teams.Count; i++)
+			@for (int i = 0; i < m_gameActor.Config.Teams.Count; i++)
 			{
-			<td>@m_gameActor.GetTeamTotal(i)</td>
+			<td>@m_gameActor.Score.GetTeamTotal(i)</td>
 			}
 		</tr>
 		</tbody>

@@ -16,7 +16,7 @@ namespace FishbowlScorekeeper.App.Pages
 		private IJSRuntime m_jsRuntime { get; set; }
 
 		[Inject]
-		private IGameConfig m_gameConfig { get; set; }
+		private IGameActor m_gameActor { get; set; }
 
 		[Inject]
 		private NavigationManager m_navigationManager { get; set; }
@@ -88,7 +88,7 @@ namespace FishbowlScorekeeper.App.Pages
 			for (int i = 0; i < NumRounds; i++)
 				rounds.Add(new Round(RoundNames[i], RoundDurations[i]));
 
-			m_gameConfig.Init(teams, rounds);
+			m_gameActor.Init(new GameConfig(teams, rounds));
 
 			m_navigationManager.NavigateTo("playgame");
 		}

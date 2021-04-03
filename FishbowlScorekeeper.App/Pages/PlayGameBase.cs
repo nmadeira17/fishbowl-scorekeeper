@@ -15,11 +15,11 @@ namespace FishbowlScorekeeper.App.Pages
 		private IJSRuntime m_jsRuntime { get; set; }
 
 		[Inject]
-		protected IGameConfig m_gameConfig { get; private set; }
+		protected IGameActor m_gameActor { get; private set; }
 
 		protected void OnClick()
 		{
-			m_jsRuntime.InvokeVoidAsync("alert", "Start game!\n" + m_gameConfig.ToString());
+			m_jsRuntime.InvokeVoidAsync("alert", "Start game!\n" + m_gameActor.ToString());
 		}
 	}
 }

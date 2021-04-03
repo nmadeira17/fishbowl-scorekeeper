@@ -8,8 +8,6 @@ namespace FishbowlScorekeeper.Shared
 	{
 		IList<Team> Teams { get; }
 		IList<Round> Rounds { get; }
-
-		void Init(IList<Team> teams, IList<Round> rounds);
 	}
 
 	public class GameConfig : IGameConfig
@@ -17,13 +15,7 @@ namespace FishbowlScorekeeper.Shared
 		public IList<Team> Teams { get; private set; }
 		public IList<Round> Rounds { get; private set; }
 
-		public GameConfig()
-		{
-			Teams = new List<Team>();
-			Rounds = new List<Round>();
-		}
-
-		public void Init(IList<Team> teams, IList<Round> rounds)
+		public GameConfig(IList<Team> teams, IList<Round> rounds)
 		{
 			Teams = teams;
 			Rounds = rounds;

@@ -4,60 +4,34 @@ using System.Text;
 
 namespace FishbowlScorekeeper.Shared
 {
-	public class GameActor
+	public interface IGameActor
 	{
-		private IGameConfig m_gameConfig;
-		private GameScore m_score;
-		
-		private int m_iCurrentRound;
-		private int m_iCurrentTeam;
+		void Init(IGameConfig gameConfig);
 
-		public GameActor(IGameConfig gameConfig)
-		{
-			m_gameConfig = gameConfig;
-			m_score = new GameScore(m_gameConfig.Teams.Count, m_gameConfig.Rounds.Count);
-		}
+		IGameConfig Config { get; }
+		IGameScore Score { get; }
+	}
 
-		/* Accessors */
-		public string GetCurrentRoundName()
-		{
-			return m_gameConfig.Rounds[m_iCurrentRound].Name;
-		}
+	public class GameActor : IGameActor
+	{
+		public IGameConfig Config { get; private set; }
+		public IGameScore Score { get; private set; }
 
-		public string GetCurrentTeamName()
+		public void Init(IGameConfig gameConfig)
 		{
-			return m_gameConfig.Teams[ICurrentTeam()].Name;
-		}
-
-		public int GetScore(int team, int round)
-		{
-			return m_score.GetScore(team, round);
-		}
-
-		public int GetTeamTotal(int team)
-		{
-			return m_score.GetTeamTotal(team);
-		}
-
-		/* Game Management */
-		public void OnTurnOver(int score)
-		{
-			// set score
-			m_iCurrentTeam++;
-		}
-
-		public void OnRoundOver()
-		{
-			m_iCurrentRound++;
-		}
-
-		private int ICurrentTeam()
-		{
-			return m_iCurrentTeam % m_gameConfig.Teams.Count;
+			Config = gameConfig;
+			Score = new GameScore(Config.Teams.Count, Config.Rounds.Count);
 		}
 	}
 
-	public class GameScore
+	public interface IGameScore
+	{
+		void SetScore(int team, int round, int score);
+		int GetScore(int team, int round);
+		int GetTeamTotal(int team);
+	}
+
+	public class GameScore : IGameScore
 	{
 		private int[,] m_score;
 

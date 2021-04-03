@@ -8,14 +8,6 @@ namespace FishbowlScorekeeper.App.Components
 	public class ScoreboardBase : ComponentBase
 	{
 		[Inject]
-		protected IGameConfig m_gameConfig { get; private set; }
-
-		protected GameActor m_gameActor;
-
-		protected override Task OnInitializedAsync()
-		{
-			m_gameActor = new GameActor(m_gameConfig);
-			return base.OnInitializedAsync();
-		}
+		protected IGameActor m_gameActor { get; private set; }
 	}
 }
